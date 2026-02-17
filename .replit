@@ -1,0 +1,41 @@
+run = [
+  "gunicorn",
+  "--bind",
+  "0.0.0.0:8080",
+  "--workers",
+  "3",
+  "--timeout",
+  "120",
+  "main:app",
+]
+entrypoint = "main.py"
+modules = ["python-3.11"]
+
+[nix]
+channel = "stable-24_05"
+
+[unitTest]
+language = "python3"
+
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix"]
+
+[deployment]
+run = [
+  "gunicorn",
+  "--bind",
+  "0.0.0.0:8080",
+  "--workers",
+  "3",
+  "--timeout",
+  "120",
+  "main:app",
+]
+deploymentTarget = "cloudrun"
+
+[[ports]]
+localPort = 8080
+externalPort = 80
+
+[agent]
+expertMode = true
